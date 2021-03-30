@@ -11,23 +11,24 @@
     <div v-if="isCollection">
       <div v-if="isHorizontal">
         <tr>
-          <th v-for="(value, key) in targetValue" :key="key">{{ key }}</th>
+          <EntryHeader
+              v-for="(value, key) in targetValue"
+              :key="key"
+              :entry-key="key"
+              @drop="dropEntryByKey(key)"
+          />
         </tr>
         <tr>
           <td v-for="(value) in targetValue" :key="value">
-            <TableArea :target-object="value"
-                       :show-controls="showControls"
-            ></TableArea>
+            <TableArea :target-object="value" :show-controls="showControls"/>
           </td>
         </tr>
       </div>
       <div v-else>
         <tr v-for="(value, key) in targetValue" :key="value">
-          <th>{{ key }}</th>
+          <EntryHeader :entry-key="key" @drop="dropEntryByKey(key)"/>
           <td>
-            <TableArea :target-object="value"
-                       :show-controls="showControls"
-            ></TableArea>
+            <TableArea :target-object="value" :show-controls="showControls"/>
           </td>
         </tr>
       </div>
@@ -37,8 +38,13 @@
 </template>
 
 <script>
+import EntryHeader from "./EntryHeader";
+
 export default {
   name: 'TableArea',
+  components: {
+    EntryHeader
+  },
   props: {
     targetObject: {},
     showControls: {type: Boolean, required: false, default: true}
@@ -73,6 +79,15 @@ export default {
   methods: {
     flip: function () {
       this.isHorizontal = !this.isHorizontal;
+    },
+    dropEntryByKey(key) {
+      console.log("deleting " + key)
+      if (this.isArray) {
+        this.targetValue.splice(parseInt(key), 1);
+      }
+      if (this.isObject) {
+        this.$delete(this.targetValue, key)
+      }
     }
   }
 }
