@@ -6,7 +6,7 @@
       </p>
       <p>
         <input id="showControls" type="checkbox" v-model="showControls">
-        <label for="showControls">Show control buttons</label>
+        <label for="showControls">(Alt) Show control buttons.</label>
       </p>
       <p>
         <input id="indent" type="checkbox" v-model="indent">
@@ -49,9 +49,20 @@ export default {
       }
     }
   },
-  mounted: function () {
+  mounted() {
+    window.addEventListener("keydown", e => {
+      if (e.altKey) {
+        this.showControls = true
+      }
+    });
+    window.addEventListener("keyup", e => {
+      if (!e.altKey) {
+        this.showControls = false
+      }
+    });
+
     axios
-        .get('https://randomuser.me/api/', { transformResponse: (r) => r })
+        .get('https://randomuser.me/api/', {transformResponse: (r) => r})
         .then(response => {
           this.objectText = response.data
         });
