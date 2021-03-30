@@ -2,7 +2,7 @@
   <div id="app">
     <div>
       <p>
-        Insert your JSON here (or use <a href="/?randomJson=true">random JSON</a>):
+        Insert your JSON here (or use <a href="/json2table/?randomJson=true">random JSON</a>):
         <br/>
         <textarea v-model="objectText"/>
         <br/>
