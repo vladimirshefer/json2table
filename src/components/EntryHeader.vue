@@ -1,5 +1,4 @@
 <template>
-  <div>
     <th tabindex="0" @focus="showControls=true" @focusout="showControls=false" @keypress.delete="tryDrop">
       {{ entryKey }}
       <div class="entry-controls" v-show="showControls">
@@ -9,7 +8,6 @@
         >{{ wantToDrop ? "✓" : "✗" }}</a>
       </div>
     </th>
-  </div>
 </template>
 
 <script>
