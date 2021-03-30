@@ -1,14 +1,21 @@
 <template>
   <div id="app">
-    <input type="text" v-model="objectText">
-    <br>
-    <input type="checkbox" v-model="showControls">
-    <br>
-    <table border="1">
-      <TableArea :target-object="targetObject"
-                 :show-controls="showControls"
-      ></TableArea>
-    </table>
+    <div>
+      <p>
+        <input type="text" v-model="objectText">
+      </p>
+      <p>
+        <input name="showControls" type="checkbox" v-model="showControls">
+        <label for="showControls">Show control buttons</label>
+      </p>
+    </div>
+    <div>
+      <table border="1">
+        <TableArea :target-object="targetObject"
+                   :show-controls="showControls"
+        ></TableArea>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -24,7 +31,7 @@ export default {
   data() {
     return {
       targetObject: ["no data"],
-      showControls: true
+      showControls: false
     }
   },
   computed: {

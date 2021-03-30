@@ -3,7 +3,7 @@
     <input v-if="isPrimitive" type="text" v-model="targetObject">
 
     <div v-show="isCollection && showControls">
-      <input type="button" :value="isHorizontal?'—':'|'" @click="flip">
+      <input type="button" value="⟳" @click="flip" title="Rotate table">
     </div>
 
     <div v-if="isHorizontal">
