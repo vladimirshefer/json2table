@@ -2,8 +2,10 @@
   <div>
     <input v-if="isPrimitive" type="text" v-model="targetObject">
 
-    <div v-show="isCollection && showControls">
-      <input type="button" value="⟳" @click="flip" title="Rotate table">
+    <div style="position: relative;">
+      <div class="controls" v-show="isCollection && showControls">
+        <input type="button" value="⟳" @click="flip" title="Rotate table">
+      </div>
     </div>
 
     <div v-if="isHorizontal">
@@ -72,4 +74,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+div.controls {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
 </style>
