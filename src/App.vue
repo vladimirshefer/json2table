@@ -5,7 +5,7 @@
         <input type="text" v-model="objectText">
       </p>
       <p>
-        <input name="showControls" type="checkbox" v-model="showControls">
+        <input id="showControls" type="checkbox" v-model="showControls">
         <label for="showControls">Show control buttons</label>
       </p>
     </div>
