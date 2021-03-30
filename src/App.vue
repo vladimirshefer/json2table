@@ -1,28 +1,43 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <input type="text" v-model="objectText">
+    <table border="1">
+      <TableArea :target-object="targetObject"></TableArea>
+    </table>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TableArea from './components/TableArea.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    TableArea
+  },
+  data() {
+    return {
+      targetObject: [
+        {
+          a1: "v1",
+          a2: "v2",
+          a3: "v3"
+        }
+      ]
+    }
+  },
+  computed: {
+    objectText: {
+      get: function () {
+        return JSON.stringify(this.targetObject);
+      },
+      set: function (str) {
+        this.targetObject = JSON.parse(str)
+      }
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
 </style>
