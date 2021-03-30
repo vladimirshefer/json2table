@@ -20,6 +20,10 @@
         ></TableArea>
       </table>
     </div>
+    <div class="footer">
+      <hr>
+      Author: <a href="https://github.com/vladimirshefer">Vladimir Shefer</a>. Source code on <a href="https://github.com/vladimirshefer/json2table">GitHub</a>.
+    </div>
   </div>
 </template>
 
