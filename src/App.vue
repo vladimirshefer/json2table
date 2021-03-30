@@ -37,10 +37,10 @@ export default {
   computed: {
     objectText: {
       get: function () {
-        return JSON.stringify(this.targetObject);
+        return JSON.stringify(this.targetObject, (__, value) => value.data);
       },
       set: function (str) {
-        this.targetObject = JSON.parse(str)
+        this.targetObject = JSON.parse(str, (__, value) => ({data: value}))
       }
     }
   },

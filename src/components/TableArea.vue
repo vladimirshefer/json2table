@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input v-if="isPrimitive" type="text" v-model="targetObject">
+    <input v-if="isPrimitive" type="text" v-model="targetValue">
 
     <div style="position: relative;">
       <div class="controls" v-show="isCollection && showControls">
@@ -11,10 +11,10 @@
     <div v-if="isHorizontal">
       <div v-if="isCollection">
         <tr>
-          <th v-for="(value, key) in targetObject" :key="key">{{ key }}</th>
+          <th v-for="(value, key) in targetValue" :key="key">{{ key }}</th>
         </tr>
         <tr>
-          <td v-for="(value) in targetObject" :key="value">
+          <td v-for="(value) in targetValue" :key="value">
             <TableArea :target-object="value"
                        :show-controls="showControls"
             ></TableArea>
@@ -24,7 +24,7 @@
     </div>
     <div v-else>
       <div v-if="isCollection">
-        <tr v-for="(value, key) in targetObject" :key="value">
+        <tr v-for="(value, key) in targetValue" :key="value">
           <th>{{ key }}</th>
           <td>
             <TableArea :target-object="value"
@@ -52,27 +52,37 @@ export default {
   },
   computed: {
     isObject() {
-      return !this.isArray && typeof this.targetObject === 'object' && this.targetObject !== null
+      return !this.isArray && typeof this.targetValue === 'object' && this.targetValue !== null
     },
     isArray() {
-      return Array.isArray(this.targetObject);
+      return Array.isArray(this.targetValue);
     },
     isCollection() {
       return this.isArray || this.isObject
     },
     isPrimitive() {
       return !this.isCollection;
+    },
+    targetValue: {
+      get() {
+        return this.targetObject.data
+      },
+      set: function(argument) {
+        this.targetObject.data = argument
+      }
     }
   },
   methods: {
     flip: function (){
       this.isHorizontal = !this.isHorizontal;
+    },
+    isCollection1: function (any) {
+      return typeof any === 'object' && any !== null
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 div.controls {
   position: absolute;
