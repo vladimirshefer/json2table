@@ -8,8 +8,8 @@
       </div>
     </div>
 
-    <div v-if="isHorizontal">
-      <div v-if="isCollection">
+    <div v-if="isCollection">
+      <div v-if="isHorizontal">
         <tr>
           <th v-for="(value, key) in targetValue" :key="key">{{ key }}</th>
         </tr>
@@ -21,9 +21,7 @@
           </td>
         </tr>
       </div>
-    </div>
-    <div v-else>
-      <div v-if="isCollection">
+      <div v-else>
         <tr v-for="(value, key) in targetValue" :key="value">
           <th>{{ key }}</th>
           <td>
@@ -47,7 +45,7 @@ export default {
   },
   data() {
     return {
-        isHorizontal: false
+      isHorizontal: false
     }
   },
   computed: {
@@ -67,17 +65,14 @@ export default {
       get() {
         return this.targetObject.data
       },
-      set: function(argument) {
+      set: function (argument) {
         this.targetObject.data = argument
       }
     }
   },
   methods: {
-    flip: function (){
+    flip: function () {
       this.isHorizontal = !this.isHorizontal;
-    },
-    isCollection1: function (any) {
-      return typeof any === 'object' && any !== null
     }
   }
 }
