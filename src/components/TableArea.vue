@@ -2,20 +2,32 @@
   <div>
     <input v-if="isPrimitive" type="text" v-model="targetObject">
 
-    <tr v-for="(arrayLine, index) in getAsArrayOrEmpty" :key="arrayLine">
-      <th>{{ index }}</th>
-      <td>
-        <TableArea :target-object="arrayLine"></TableArea>
-      </td>
-    </tr>
+    <div v-if="innerCollectionIsHorizontal">
+      <div v-if="isCollection">
+        <tr>
+          <th v-for="(value, key) in targetObject" :key="key">{{ key }}</th>
+        </tr>
+        <tr>
+          <td v-for="(value) in targetObject" :key="value">
+            <TableArea :target-object="value"
+                       :inner-collection-is-horizontal="false"
+            ></TableArea>
+          </td>
+        </tr>
+      </div>
+    </div>
+    <div v-else>
+      <div v-if="isCollection">
+        <tr v-for="(value, key) in targetObject" :key="value">
+          <th>{{ key }}</th>
+          <td>
+            <TableArea :target-object="value"
+                       :inner-collection-is-horizontal="isCollection && !innerCollectionIsHorizontal"></TableArea>
+          </td>
+        </tr>
+      </div>
 
-    <tr v-for="(value, key) in getAsObjectOrEmpty" :key="value">
-      <th>{{ key }}</th>
-      <td>
-        <TableArea :target-object="value"></TableArea>
-      </td>
-    </tr>
-
+    </div>
   </div>
 </template>
 
@@ -23,7 +35,8 @@
 export default {
   name: 'TableArea',
   props: {
-    targetObject: {}
+    targetObject: {},
+    innerCollectionIsHorizontal: {type: Boolean, default: false}
   },
   data() {
     return {}
@@ -38,19 +51,8 @@ export default {
     isPrimitive() {
       return !this.isObject && !this.isArray;
     },
-    getAsArrayOrEmpty() {
-      if (this.isArray) {
-        return this.targetObject
-      } else {
-        return [];
-      }
-    },
-    getAsObjectOrEmpty() {
-      if (this.isObject) {
-        return this.targetObject
-      } else {
-        return {};
-      }
+    isCollection() {
+      return this.isArray || this.isObject
     }
   }
 }
