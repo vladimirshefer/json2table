@@ -2,7 +2,11 @@
   <div id="app">
     <div>
       <p>
+        Insert your JSON here (or use <a href="/?randomJson=true">random JSON</a>):
+        <br/>
         <textarea v-model="objectText"/>
+        <br/>
+        You can change values in table. All changes will be applied to this JSON.
       </p>
       <p>
         <input id="showControls" type="checkbox" v-model="showControls">
@@ -53,6 +57,15 @@ export default {
       }
     }
   },
+  methods: {
+    loadRandomJson() {
+      axios
+          .get('https://randomuser.me/api/', {transformResponse: (r) => r})
+          .then(response => {
+            this.objectText = response.data
+          });
+    }
+  },
   mounted() {
     window.addEventListener("keydown", e => {
       if (e.altKey) {
@@ -65,11 +78,11 @@ export default {
       }
     });
 
-    axios
-        .get('https://randomuser.me/api/', {transformResponse: (r) => r})
-        .then(response => {
-          this.objectText = response.data
-        });
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    if (urlParams.get("randomJson")) {
+      this.loadRandomJson();
+    }
   }
 }
 </script>
