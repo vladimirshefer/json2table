@@ -84,9 +84,4 @@ export default {
 </script>
 
 <style scoped>
-div.controls {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
 </style>

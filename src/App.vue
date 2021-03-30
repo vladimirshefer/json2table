@@ -59,9 +59,9 @@ export default {
 }
 </script>
 
+<style>
+@import './assets/styles/main.css';
+</style>
+
 <style scoped>
-textarea{
-  width: 80%;
-  height: auto;
-}
 </style>

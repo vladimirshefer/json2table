@@ -1,0 +1,10 @@
+textarea {
+    width: 80%;
+    height: auto;
+}
+
+div.controls {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
