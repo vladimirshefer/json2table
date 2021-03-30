@@ -8,6 +8,10 @@
         <input id="showControls" type="checkbox" v-model="showControls">
         <label for="showControls">Show control buttons</label>
       </p>
+      <p>
+        <input id="indent" type="checkbox" v-model="indent">
+        <label for="indent">Format JSON</label>
+      </p>
     </div>
     <div>
       <table border="1">
@@ -31,13 +35,14 @@ export default {
   data() {
     return {
       targetObject: ["no data"],
-      showControls: false
+      showControls: false,
+      indent: false
     }
   },
   computed: {
     objectText: {
       get: function () {
-        return JSON.stringify(this.targetObject, (__, value) => value.data);
+        return JSON.stringify(this.targetObject, (__, value) => value.data, this.indent ? 2 : null);
       },
       set: function (str) {
         this.targetObject = JSON.parse(str, (__, value) => ({data: value}))
