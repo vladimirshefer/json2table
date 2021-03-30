@@ -48,11 +48,11 @@ export default {
     isArray() {
       return Array.isArray(this.targetObject);
     },
-    isPrimitive() {
-      return !this.isObject && !this.isArray;
-    },
     isCollection() {
       return this.isArray || this.isObject
+    },
+    isPrimitive() {
+      return !this.isCollection;
     }
   }
 }
