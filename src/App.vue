@@ -2,7 +2,7 @@
   <div id="app">
     <div>
       <p>
-        <input type="text" v-model="objectText">
+        <textarea v-model="objectText"/>
       </p>
       <p>
         <input id="showControls" type="checkbox" v-model="showControls">
@@ -55,4 +55,8 @@ export default {
 </script>
 
 <style scoped>
+textarea{
+  width: 80%;
+  height: auto;
+}
 </style>
