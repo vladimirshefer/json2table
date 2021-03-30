@@ -1,8 +1,13 @@
 <template>
   <div id="app">
     <input type="text" v-model="objectText">
+    <br>
+    <input type="checkbox" v-model="showControls">
+    <br>
     <table border="1">
-      <TableArea :target-object="targetObject"></TableArea>
+      <TableArea :target-object="targetObject"
+                 :show-controls="showControls"
+      ></TableArea>
     </table>
   </div>
 </template>
@@ -18,7 +23,8 @@ export default {
   },
   data() {
     return {
-      targetObject: ["no data"]
+      targetObject: ["no data"],
+      showControls: true
     }
   },
   computed: {

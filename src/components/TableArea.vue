@@ -2,7 +2,11 @@
   <div>
     <input v-if="isPrimitive" type="text" v-model="targetObject">
 
-    <div v-if="innerCollectionIsHorizontal">
+    <div v-show="isCollection && showControls">
+      <input type="button" :value="isHorizontal?'—':'|'" @click="flip">
+    </div>
+
+    <div v-if="isHorizontal">
       <div v-if="isCollection">
         <tr>
           <th v-for="(value, key) in targetObject" :key="key">{{ key }}</th>
@@ -10,7 +14,7 @@
         <tr>
           <td v-for="(value) in targetObject" :key="value">
             <TableArea :target-object="value"
-                       :inner-collection-is-horizontal="false"
+                       :show-controls="showControls"
             ></TableArea>
           </td>
         </tr>
@@ -22,7 +26,8 @@
           <th>{{ key }}</th>
           <td>
             <TableArea :target-object="value"
-                       :inner-collection-is-horizontal="isCollection && !innerCollectionIsHorizontal"></TableArea>
+                       :show-controls="showControls"
+            ></TableArea>
           </td>
         </tr>
       </div>
@@ -36,10 +41,12 @@ export default {
   name: 'TableArea',
   props: {
     targetObject: {},
-    innerCollectionIsHorizontal: {type: Boolean, default: false}
+    showControls: {type: Boolean, required: false, default: true}
   },
   data() {
-    return {}
+    return {
+        isHorizontal: false
+    }
   },
   computed: {
     isObject() {
@@ -53,6 +60,11 @@ export default {
     },
     isPrimitive() {
       return !this.isCollection;
+    }
+  },
+  methods: {
+    flip: function (){
+      this.isHorizontal = !this.isHorizontal;
     }
   }
 }
