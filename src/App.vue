@@ -9,6 +9,7 @@
 
 <script>
 import TableArea from './components/TableArea.vue'
+import axios from "axios"
 
 export default {
   name: 'App',
@@ -17,13 +18,7 @@ export default {
   },
   data() {
     return {
-      targetObject: [
-        {
-          a1: "v1",
-          a2: "v2",
-          a3: "v3"
-        }
-      ]
+      targetObject: ["no data"]
     }
   },
   computed: {
@@ -35,6 +30,13 @@ export default {
         this.targetObject = JSON.parse(str)
       }
     }
+  },
+  mounted: function () {
+    axios
+        .get('https://randomuser.me/api/', { transformResponse: (r) => r })
+        .then(response => {
+          this.objectText = response.data
+        });
   }
 }
 </script>
