@@ -1,33 +1,43 @@
 <template>
-  <div id="app">
-    <div>
-      <p>
-        Insert your JSON here (or use <a href="/json2table/?randomJson=true">random JSON</a>):
-        <br/>
-        <textarea v-model="objectText"/>
-        <br/>
-        You can change values in table. All changes will be applied to this JSON.
-      </p>
-      <p>
+  <div class="container-fluid" id="app">
+    <div class="row header">
+      <div class="col-3">
         <input id="showControls" type="checkbox" v-model="showControls">
         <label for="showControls">(Alt) Show control buttons.</label>
-      </p>
-      <p>
+      </div>
+      <div class="col-3">
         <input id="indent" type="checkbox" v-model="indent">
         <label for="indent">Format JSON</label>
-      </p>
+      </div>
     </div>
-    <div>
-      <table border="1">
-        <TableArea :target-object="targetObject"
-                   :show-controls="showControls"
-        ></TableArea>
-      </table>
+    <div class="row">
+      <div class="col-4">
+        <textarea v-model="objectText"/>
+        <p>
+          Insert your JSON here (or use <a href="/json2table/?randomJson=true">random JSON</a>).
+        </p>
+        <p>
+          You can change values in table. All changes will be applied to this JSON.
+        </p>
+      </div>
+      <div id="table" class="col-8">
+        <table v-show="objectText" border="1">
+          <TableArea :target-object="targetObject"
+                     :show-controls="showControls"
+          />
+        </table>
+      </div>
     </div>
-    <History :value="objectText"/>
-    <div class="footer">
-      <hr>
-      Author: <a href="https://github.com/vladimirshefer">Vladimir Shefer</a>. Source code on <a href="https://github.com/vladimirshefer/json2table">GitHub</a>.
+    <div class="row">
+      <div class="col-12" id="history">
+        <History :value="objectText"/>
+      </div>
+    </div>
+    <div class="row footer">
+      <div class="col-12">
+        Author: <a href="https://github.com/vladimirshefer">Vladimir Shefer</a>.
+        Source code on <a href="https://github.com/vladimirshefer/json2table">GitHub</a>.
+      </div>
     </div>
   </div>
 </template>

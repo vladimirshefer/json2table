@@ -1,10 +1,21 @@
 textarea {
-    width: 80%;
-    height: auto;
+    box-sizing: border-box; /* fit parent width */
+    min-height: 50px;
+    height: calc(100% - 150px);
+    width: 100%;
 }
 
 div.controls {
     position: absolute;
     left: 0;
     top: 0;
+}
+
+.row {
+    border-bottom: 1px solid gray;
+    margin-bottom: 5px;
+}
+
+div#table {
+    overflow:scroll;
 }
