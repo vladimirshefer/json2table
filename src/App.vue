@@ -24,6 +24,7 @@
         ></TableArea>
       </table>
     </div>
+    <History :history="history"/>
     <div class="footer">
       <hr>
       Author: <a href="https://github.com/vladimirshefer">Vladimir Shefer</a>. Source code on <a href="https://github.com/vladimirshefer/json2table">GitHub</a>.
@@ -34,17 +35,20 @@
 <script>
 import TableArea from './components/TableArea.vue'
 import axios from "axios"
+import History from "./components/History";
 
 export default {
   name: 'App',
   components: {
+    History,
     TableArea
   },
   data() {
     return {
       targetObject: ["no data"],
       showControls: false,
-      indent: false
+      indent: false,
+      history: []
     }
   },
   computed: {
@@ -64,9 +68,27 @@ export default {
           .then(response => {
             this.objectText = response.data
           });
+    },
+    pushHistory() {
+      let objectText = this.objectText;
+      if ((this.history[0] || {}).value !== objectText) {
+        this.history.unshift({
+          date: new Date(),
+          value: objectText
+        });
+      }
     }
   },
   mounted() {
+    /**
+     * Ctrl+S handler. This shortcut saves current document state to history.
+     */
+    window.addEventListener("keydown", e => {
+      if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) && e.keyCode == 83) {
+        e.preventDefault();
+        this.pushHistory();
+      }
+    });
     window.addEventListener("keydown", e => {
       if (e.altKey) {
         this.showControls = true
