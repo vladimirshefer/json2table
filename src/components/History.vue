@@ -31,9 +31,9 @@ export default {
   },
   computed: {
     noChangesDetected() {
-      let emptyHistoryAndValue = this.history.length === 0 && this.value === "";
+      let emptyValue = this.value == "";
       let valueIsInHistory = this.history.length !== 0 && this.history[0].value === this.value;
-      return emptyHistoryAndValue || valueIsInHistory
+      return emptyValue || valueIsInHistory
     }
   },
   methods: {
