@@ -25,7 +25,7 @@
         </tr>
       </div>
       <div v-else>
-        <tr v-for="(value, key) in targetValue" :key="value">
+        <tr v-for="(value, key) in targetValue" :key="key">
           <EntryHeader :entry-key="key" @drop="dropEntryByKey(key)"/>
           <td>
             <TableArea :target-object="value" :show-controls="showControls"/>
