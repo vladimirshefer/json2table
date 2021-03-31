@@ -1,14 +1,10 @@
 <template>
   <div class="container-fluid" id="app">
     <div class="row header">
-      <div class="col-3">
-        <input id="showControls" type="checkbox" v-model="showControls">
-        <label for="showControls">(Alt) Show control buttons.</label>
-      </div>
-      <div class="col-3">
-        <input id="indent" type="checkbox" v-model="indent">
-        <label for="indent">Format JSON</label>
-      </div>
+      <option-toggle-button hint="(Alt) Show control buttons." :enabled="showControls" icon-name="segmented-nav"
+                            @click="showControls = !showControls"/>
+      <option-toggle-button hint="Format JSON" :enabled="indent" icon-name="text-indent-left"
+                            @click="indent = !indent"/>
     </div>
     <div class="row">
       <div class="col-4">
@@ -46,10 +42,12 @@
 import TableArea from './components/TableArea.vue'
 import axios from "axios"
 import History from "./components/History";
+import OptionToggleButton from "./components/OptionToggleButton";
 
 export default {
   name: 'App',
   components: {
+    OptionToggleButton,
     History,
     TableArea
   },
@@ -106,4 +104,7 @@ export default {
 </style>
 
 <style scoped>
+.header { /* TODO temporary solution. remove after bootstrap nav applied*/
+  padding: 10px;
+}
 </style>
