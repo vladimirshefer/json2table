@@ -1,13 +1,21 @@
 <template>
-  <ul>
-    <li v-if="history.length===0">History is empty. Use Ctrl+S to save current state.</li>
-    <li v-for="revision in history" :key="revision.value">
-          <span>
-            {{ revision.date.getHours() + ":" + revision.date.getMinutes() + ":" + revision.date.getSeconds() }}
-          </span>
-      <input type="text" disabled :value="revision.value">
-    </li>
-  </ul>
+  <div>
+    <p v-if="history.length===0">
+      History is empty. Use Ctrl+S to save current state.
+    </p>
+    <p v-if="noChangesDetected">
+      All changes are saved...
+    </p>
+
+    <ul>
+      <li v-for="revision in history" :key="revision.value">
+      <span>
+        {{ revision.date.getHours() + ":" + revision.date.getMinutes() + ":" + revision.date.getSeconds() }}
+      </span>
+        <input type="text" disabled :value="revision.value">
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -21,9 +29,16 @@ export default {
       history: []
     }
   },
+  computed: {
+    noChangesDetected() {
+      let emptyHistoryAndValue = this.history.length === 0 && this.value === "";
+      let valueIsInHistory = this.history.length !== 0 && this.history[0].value === this.value;
+      return emptyHistoryAndValue || valueIsInHistory
+    }
+  },
   methods: {
     pushHistory() {
-      if ((this.history[0] || {}).value !== this.value) {
+      if (!this.noChangesDetected) {
         this.history.unshift({
           date: new Date(),
           value: this.value
