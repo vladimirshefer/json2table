@@ -53,7 +53,7 @@ export default {
   },
   data() {
     return {
-      targetObject: ["no data"],
+      targetObject: {data: null},
       showControls: false,
       indent: false,
       history: []
