@@ -1,6 +1,8 @@
 <template>
   <div>
-    <input v-if="isPrimitive" type="text" v-model="targetValue">
+    <span v-show="isPrimitive && !editable" @dblclick="editable = true">{{targetValue}}</span>
+    <input v-show="isPrimitive && editable" type="text" @keydown.enter="editable = false" v-model="targetValue">
+
 
     <div style="position: relative;">
       <div class="controls" v-show="isCollection && showControls">
@@ -51,7 +53,8 @@ export default {
   },
   data() {
     return {
-      isHorizontal: false
+      isHorizontal: false,
+      editable: false,
     }
   },
   computed: {
