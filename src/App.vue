@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid" id="app">
     <div class="row header">
-      <option-toggle-button hint="(Alt) Show control buttons." :enabled="showControls" icon-name="segmented-nav"
+      <option-toggle-button hint="(Alt) Show control buttons." :enabled="showControls" icon-name="wrench"
                             @click="showControls = !showControls"/>
       <option-toggle-button hint="Format JSON" :enabled="indent" icon-name="text-indent-left"
                             @click="indent = !indent"/>
