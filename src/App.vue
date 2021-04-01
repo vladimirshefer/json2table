@@ -79,17 +79,6 @@ export default {
     },
   },
   mounted() {
-    window.addEventListener("keydown", e => {
-      if (e.altKey) {
-        this.showControls = true
-      }
-    });
-    window.addEventListener("keyup", e => {
-      if (!e.altKey) {
-        this.showControls = false
-      }
-    });
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     if (urlParams.get("randomJson")) {
