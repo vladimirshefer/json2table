@@ -2,6 +2,7 @@
   <b-button
       :title="hint"
       :variant="enabled?'primary':'primary-outlined'"
+      :size="size"
       @click="$emit('click')"
   >
     <b-icon :icon="iconName"/>
@@ -10,11 +11,12 @@
 
 <script>
 export default {
-  name: "OptionToggleButton",
+  name: "CheckboxButton",
   props: {
     iconName: {type: String},
     hint: {type: String},
-    enabled: {type: Boolean}
+    enabled: {type: Boolean},
+    size: {type: String, default: ""}
   }
 }
 </script>

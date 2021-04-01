@@ -1,10 +1,7 @@
 <template>
   <div class="container-fluid" id="app">
+    <Header :settings="headerSettings"/>
     <div class="row header">
-      <option-toggle-button hint="(Alt) Show control buttons." :enabled="showControls" icon-name="segmented-nav"
-                            @click="showControls = !showControls"/>
-      <option-toggle-button hint="Format JSON" :enabled="indent" icon-name="text-indent-left"
-                            @click="indent = !indent"/>
     </div>
     <div class="row">
       <div class="col-4">
@@ -19,7 +16,7 @@
       <div id="table" class="col-8">
         <table v-show="objectText" border="1">
           <TableArea :target-object="targetObject"
-                     :show-controls="showControls"
+                     :show-controls="headerSettings.showControls"
           />
         </table>
       </div>
@@ -42,27 +39,29 @@
 import TableArea from './components/TableArea.vue'
 import axios from "axios"
 import History from "./components/History";
-import OptionToggleButton from "./components/OptionToggleButton";
+import Header from "./components/header/Header";
 
 export default {
   name: 'App',
   components: {
-    OptionToggleButton,
+    Header,
     History,
     TableArea
   },
   data() {
     return {
       targetObject: {data: null},
-      showControls: false,
-      indent: false,
-      history: []
+      history: [],
+      headerSettings: {
+        showControls: false,
+        indent: false
+      }
     }
   },
   computed: {
     objectText: {
       get: function () {
-        return JSON.stringify(this.targetObject, (__, value) => value.data, this.indent ? 2 : null);
+        return JSON.stringify(this.targetObject, (__, value) => value.data, this.headerSettings.indent ? 2 : null);
       },
       set: function (str) {
         this.targetObject = JSON.parse(str, (__, value) => ({data: value}))
@@ -81,12 +80,12 @@ export default {
   mounted() {
     window.addEventListener("keydown", e => {
       if (e.altKey) {
-        this.showControls = true
+        this.headerSettings.showControls = true
       }
     });
     window.addEventListener("keyup", e => {
       if (!e.altKey) {
-        this.showControls = false
+        this.headerSettings.showControls = false
       }
     });
 
