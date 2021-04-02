@@ -10,7 +10,7 @@
       <div class="col-4">
         <textarea v-model="objectText"/>
         <p>
-          Insert your JSON here (or use <a href="/json2table/?randomJson=true">random JSON</a>).
+          Insert your JSON here (or use <a href="/?randomJson=true">random JSON</a>).
         </p>
         <p>
           You can change values in table. All changes will be applied to this JSON.
