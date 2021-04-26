@@ -27,8 +27,8 @@
     </div>
     <div class="row footer">
       <div class="col-12">
-        Author: <a href="https://github.com/vladimirshefer">Vladimir Shefer</a>.
-        Source code on <a href="https://github.com/vladimirshefer/json2table">GitHub</a>.
+        Author: <a href="https://github.com/vladimirshefer" target="_blank">Vladimir Shefer</a>.
+        Source code on <a href="https://github.com/vladimirshefer/json2table" target="_blank">GitHub</a>.
       </div>
     </div>
   </div>
