@@ -25,11 +25,11 @@ export default {
     name: 'EntryHeader',
     props: {
         entryKey: {required: true},
+        collapse: {},
     },
     data() {
         return {
           fontSizeScale: 1.0,
-          collapse: false,
         }
     },
     methods: {
@@ -39,7 +39,6 @@ export default {
             }
         },
         toggleCollapse() {
-            this.collapse = !this.collapse
             this.$emit("collapse")
         },
         flip() {
