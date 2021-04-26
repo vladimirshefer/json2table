@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div>
-      <span v-show="isPrimitive && !editable" @dblclick="editable = true">{{ targetValue }}</span>
-      <input v-show="isPrimitive && editable" type="text" @keydown.enter="editable = false" v-model="targetValue">
-    </div>
+    <EntryPrimitiveValue v-if="isPrimitive" :target-value="targetValue"/>
 
     <div v-if="isCollection">
       <div :style="isHorizontal ? { display: 'flex' }  : { display:'block' }">
@@ -22,17 +19,17 @@
 
 <script>
 import Entry from "@/components/Entry";
+import EntryPrimitiveValue from "@/components/EntryPrimitiveValue";
 
 export default {
   name: 'TableArea',
-  components: {Entry},
+  components: {EntryPrimitiveValue, Entry},
   props: {
     targetObject: {},
   },
   data() {
     return {
       isHorizontal: false,
-      editable: false,
       collapsed: false,
     }
   },
