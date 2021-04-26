@@ -1,41 +1,31 @@
 <template>
   <div>
-    <span v-show="isPrimitive && !editable" @dblclick="editable = true">{{targetValue}}</span>
-    <input v-show="isPrimitive && editable" type="text" @keydown.enter="editable = false" v-model="targetValue">
+    <div>
+      <span v-show="isPrimitive && !editable" @dblclick="editable = true">{{ targetValue }}</span>
+      <input v-show="isPrimitive && editable" type="text" @keydown.enter="editable = false" v-model="targetValue">
+    </div>
 
     <div v-if="isCollection">
-      <div v-if="isHorizontal" class="d-flex">
-        <div class="m-1" v-for="(value, key) in targetValue" :key="key"  style="border: 1px solid black;">
-          <EntryHeader
-            :entry-key="key"
-            @drop="dropEntryByKey(key)"
-            @flip="flip"
-          />
-          <TableArea :target-object="value"/>
-        </div>
+      <div :style="isHorizontal ? { display: 'flex' }  : { display:'block' }">
+        <Entry
+          v-for="(value, key) in targetValue" :key="key"
+          :entry-key="key"
+          :value="value"
+          :style="isHorizontal ? { display: 'block' }  : { display:'flex' }"
+          @drop="dropEntryByKey(key)"
+          @flip="flip"
+        />
       </div>
-      <div v-else>
-        <div class="d-flex m-1" v-for="(value, key) in targetValue" :key="key" style="border: 1px solid black;">
-          <EntryHeader :entry-key="key"
-                       @drop="dropEntryByKey(key)"
-                       @flip="flip"
-          />
-          <TableArea :target-object="value"/>
-        </div>
-      </div>
-
     </div>
   </div>
 </template>
 
 <script>
-import EntryHeader from "./EntryHeader";
+import Entry from "@/components/Entry";
 
 export default {
   name: 'TableArea',
-  components: {
-    EntryHeader
-  },
+  components: {Entry},
   props: {
     targetObject: {},
   },
