@@ -3,13 +3,6 @@
     <span v-show="isPrimitive && !editable" @dblclick="editable = true">{{targetValue}}</span>
     <input v-show="isPrimitive && editable" type="text" @keydown.enter="editable = false" v-model="targetValue">
 
-
-    <div style="position: relative;">
-      <div class="controls" v-show="isCollection && showControls">
-        <input type="button" value="⟳" @click="flip" title="Rotate table">
-      </div>
-    </div>
-
     <div v-if="isCollection">
       <div v-if="isHorizontal">
         <tr>
@@ -23,7 +16,7 @@
         </tr>
         <tr>
           <td v-for="(value) in targetValue" :key="value">
-            <TableArea :target-object="value" :show-controls="showControls"/>
+            <TableArea :target-object="value"/>
           </td>
         </tr>
       </div>
@@ -34,7 +27,7 @@
                        @flip="flip"
           />
           <td>
-            <TableArea :target-object="value" :show-controls="showControls"/>
+            <TableArea :target-object="value"/>
           </td>
         </tr>
       </div>
@@ -53,7 +46,6 @@ export default {
   },
   props: {
     targetObject: {},
-    showControls: {type: Boolean, required: false, default: true}
   },
   data() {
     return {
@@ -101,5 +93,3 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>

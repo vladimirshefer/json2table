@@ -1,10 +1,8 @@
 <template>
   <div class="container-fluid" id="app">
     <div class="row header">
-      <option-toggle-button hint="(Alt) Show control buttons." :enabled="showControls" icon-name="wrench"
-                            @click="showControls = !showControls"/>
-      <option-toggle-button hint="Format JSON" :enabled="indent" icon-name="text-indent-left"
-                            @click="indent = !indent"/>
+      <OptionToggleButton hint="Format JSON" :enabled="indent" icon-name="text-indent-left"
+                          @click="indent = !indent"/>
     </div>
     <div class="row">
       <div class="col-4">
@@ -19,7 +17,6 @@
       <div id="table" class="col-8">
         <table v-show="objectText" border="1">
           <TableArea :target-object="targetObject"
-                     :show-controls="showControls"
           />
         </table>
       </div>
@@ -54,7 +51,6 @@ export default {
   data() {
     return {
       targetObject: {data: null},
-      showControls: false,
       indent: false,
       history: []
     }

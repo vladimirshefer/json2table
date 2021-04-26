@@ -18,7 +18,6 @@ export default {
     },
     data() {
         return {
-            showControls: false,
             fontSizeScale: 1.0
         }
     },
