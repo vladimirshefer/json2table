@@ -1,7 +1,7 @@
 <template>
   <div>
-    <span v-show="!editable" @dblclick="editable = true">{{ targetValue }}</span>
-    <input v-show="editable" type="text" @keydown.enter="editable = false" v-model="targetValue">
+    <span v-show="!editable" @dblclick="editable = true">{{ value }}</span>
+    <input v-show="editable" type="text" @keydown.enter="update" v-model="value">
   </div>
 </template>
 
@@ -13,7 +13,14 @@ export default {
   },
   data() {
     return {
-      editable: false
+      value: this.targetValue,
+      editable: false,
+    }
+  },
+  methods: {
+    update() {
+      this.editable = false
+      this.$emit("update", this.value)
     }
   }
 }

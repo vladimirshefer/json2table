@@ -1,6 +1,6 @@
 <template>
   <div>
-    <EntryPrimitiveValue v-if="isPrimitive" :target-value="targetValue"/>
+    <EntryPrimitiveValue v-if="isPrimitive" :target-value="targetValue" @update="targetValue=$event"/>
 
     <div v-if="isCollection">
       <div :style="isHorizontal ? { display: 'flex' }  : { display:'block' }">
