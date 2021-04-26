@@ -1,46 +1,51 @@
 <template>
-    <th tabindex="0" @focus="showControls=true" @focusout="showControls=false" @keypress.delete="tryDrop">
-      {{ entryKey }}
-      <div class="entry-controls" v-show="showControls">
-        <a class="entry-drop-button" title="Drop this entry. Double click to proceed."
-           @click="tryDrop"
-           @mouseout="wantToDrop = false"
-        >{{ wantToDrop ? "✓" : "✗" }}</a>
-      </div>
-    </th>
+  <th tabindex="0" @keypress.delete="tryDrop">
+    <span>{{ entryKey }}</span>
+    <b-dropdown variant="light" size="sm">
+      <b-dropdown-item @click="toggleCollapse">Свернуть</b-dropdown-item>
+      <b-dropdown-item @click="flip">Повернуть</b-dropdown-item>
+      <b-dropdown-item @click="tryDrop">Удалить</b-dropdown-item>
+    </b-dropdown>
+  </th>
 </template>
 
 <script>
 export default {
-  name: 'EntryHeader',
-  props: {
-    entryKey: {required: true},
-  },
-  data() {
-    return {
-      wantToDrop: false,
-      showControls: false
+    name: 'EntryHeader',
+    props: {
+        entryKey: {required: true},
+        collapse: {type: Boolean},
+    },
+    data() {
+        return {
+            showControls: false,
+            fontSizeScale: 1.0
+        }
+    },
+    methods: {
+        tryDrop() {
+            if (confirm("Удалить элемент?")) {
+                this.$emit("drop")
+            }
+        },
+        toggleCollapse() {
+            this.collapse = !this.collapse
+            this.$emit("collapse")
+        },
+        flip() {
+            this.$emit("flip")
+        }
     }
-  },
-  methods: {
-    tryDrop() {
-      if (this.wantToDrop) {
-        this.$emit("drop")
-      } else {
-        this.wantToDrop = true
-      }
-    }
-  }
 }
 </script>
 
 <style scoped>
 a.entry-drop-button {
-  cursor: pointer;
-  color: gray;
+    cursor: pointer;
+    color: gray;
 }
 
-th div.entry-controls {
-  display: inline;
+th {
+    /*display: flex;*/
 }
 </style>

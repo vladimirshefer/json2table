@@ -18,6 +18,7 @@
               :key="key"
               :entry-key="key"
               @drop="dropEntryByKey(key)"
+              @flip="flip"
           />
         </tr>
         <tr>
@@ -28,7 +29,10 @@
       </div>
       <div v-else>
         <tr v-for="(value, key) in targetValue" :key="key">
-          <EntryHeader :entry-key="key" @drop="dropEntryByKey(key)"/>
+          <EntryHeader :entry-key="key"
+                       @drop="dropEntryByKey(key)"
+                       @flip="flip"
+          />
           <td>
             <TableArea :target-object="value" :show-controls="showControls"/>
           </td>
@@ -55,6 +59,7 @@ export default {
     return {
       isHorizontal: false,
       editable: false,
+      collapsed: false,
     }
   },
   computed: {
