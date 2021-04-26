@@ -1,12 +1,14 @@
 <template>
-  <th tabindex="0" @keypress.delete="tryDrop">
-    <span>{{ entryKey }}</span>
-    <b-dropdown variant="light" size="sm">
-      <b-dropdown-item @click="toggleCollapse">Свернуть</b-dropdown-item>
-      <b-dropdown-item @click="flip">Повернуть</b-dropdown-item>
-      <b-dropdown-item @click="tryDrop">Удалить</b-dropdown-item>
-    </b-dropdown>
-  </th>
+  <div tabindex="0" @keypress.delete="tryDrop" class="m-1 d-flex">
+    <b>{{ entryKey }}</b>
+    <div>
+      <b-dropdown variant="light" size="sm">
+        <b-dropdown-item @click="toggleCollapse">Свернуть</b-dropdown-item>
+        <b-dropdown-item @click="flip">Повернуть</b-dropdown-item>
+        <b-dropdown-item @click="tryDrop">Удалить</b-dropdown-item>
+      </b-dropdown>
+    </div>
+  </div>
 </template>
 
 <script>

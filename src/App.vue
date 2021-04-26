@@ -15,10 +15,9 @@
         </p>
       </div>
       <div id="table" class="col-12 col-lg-8">
-        <table v-show="objectText" border="1">
-          <TableArea :target-object="targetObject"
-          />
-        </table>
+        <div v-show="objectText">
+          <TableArea :target-object="targetObject"/>
+        </div>
       </div>
     </div>
     <div class="row">

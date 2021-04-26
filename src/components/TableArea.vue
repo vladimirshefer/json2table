@@ -4,32 +4,24 @@
     <input v-show="isPrimitive && editable" type="text" @keydown.enter="editable = false" v-model="targetValue">
 
     <div v-if="isCollection">
-      <div v-if="isHorizontal">
-        <tr>
+      <div v-if="isHorizontal" class="d-flex">
+        <div class="m-1" v-for="(value, key) in targetValue" :key="key"  style="border: 1px solid black;">
           <EntryHeader
-              v-for="(value, key) in targetValue"
-              :key="key"
-              :entry-key="key"
-              @drop="dropEntryByKey(key)"
-              @flip="flip"
+            :entry-key="key"
+            @drop="dropEntryByKey(key)"
+            @flip="flip"
           />
-        </tr>
-        <tr>
-          <td v-for="(value) in targetValue" :key="value">
-            <TableArea :target-object="value"/>
-          </td>
-        </tr>
+          <TableArea :target-object="value"/>
+        </div>
       </div>
       <div v-else>
-        <tr v-for="(value, key) in targetValue" :key="key">
+        <div class="d-flex m-1" v-for="(value, key) in targetValue" :key="key" style="border: 1px solid black;">
           <EntryHeader :entry-key="key"
                        @drop="dropEntryByKey(key)"
                        @flip="flip"
           />
-          <td>
-            <TableArea :target-object="value"/>
-          </td>
-        </tr>
+          <TableArea :target-object="value"/>
+        </div>
       </div>
 
     </div>
