@@ -1,6 +1,6 @@
 textarea {
     box-sizing: border-box; /* fit parent width */
-    min-height: 50px;
+    min-height: 150px;
     height: calc(100% - 150px);
     width: 100%;
 }
