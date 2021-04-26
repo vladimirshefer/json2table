@@ -5,7 +5,7 @@
                           @click="indent = !indent"/>
     </div>
     <div class="row">
-      <div class="col-4">
+      <div class="col-12 col-lg-4">
         <textarea v-model="objectText"/>
         <p>
           Insert your JSON here (or use <a href="/?randomJson=true">random JSON</a>).
@@ -14,7 +14,7 @@
           You can change values in table. All changes will be applied to this JSON.
         </p>
       </div>
-      <div id="table" class="col-8">
+      <div id="table" class="col-12 col-lg-8">
         <table v-show="objectText" border="1">
           <TableArea :target-object="targetObject"
           />
