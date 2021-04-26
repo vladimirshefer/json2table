@@ -35,10 +35,10 @@
 </template>
 
 <script>
-import TableArea from './components/TableArea.vue'
+import TableArea from '@/components/TableArea'
 import axios from "axios"
-import History from "./components/History";
-import OptionToggleButton from "./components/OptionToggleButton";
+import History from "@/components/History";
+import OptionToggleButton from "@/components/OptionToggleButton";
 
 export default {
   name: 'App',
