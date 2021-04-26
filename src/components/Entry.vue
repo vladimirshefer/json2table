@@ -3,11 +3,11 @@
     <EntryHeader :entry-key="entryKey"
                  :collapse="isCollapsed"
                  @drop="$emit('drop', $event)"
-                 @flip="$emit('flip', $event)"
+                 @flip="flip"
                  @collapse="isCollapsed=!isCollapsed"
     />
 
-    <TableArea v-show="!isCollapsed" :target-object="value"/>
+    <TableArea v-show="!isCollapsed" :target-object="value" :is-horizontal="isHorizontal"/>
     <EntryCollapsedValue v-if="isCollapsed" @show="isCollapsed=false"/>
   </div>
 </template>
@@ -27,7 +27,13 @@ export default {
   },
   data() {
     return {
-      isCollapsed: false
+      isCollapsed: false,
+      isHorizontal: false,
+    }
+  },
+  methods: {
+    flip() {
+      this.isHorizontal = !this.isHorizontal
     }
   },
   beforeCreate() {

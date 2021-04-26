@@ -7,7 +7,7 @@
           <b-icon :icon="collapse ? 'arrows-expand' : 'arrows-collapse'"/>
           {{ collapse ? "Развернуть" : "Свернуть" }}
         </b-dropdown-item>
-        <b-dropdown-item @click="flip">
+        <b-dropdown-item @click="$emit('flip')">
           <b-icon icon="arrow-clockwise"/>
           Повернуть
         </b-dropdown-item>
@@ -41,9 +41,6 @@ export default {
         toggleCollapse() {
             this.$emit("collapse")
         },
-        flip() {
-            this.$emit("flip")
-        }
     }
 }
 </script>

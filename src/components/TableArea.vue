@@ -10,7 +10,7 @@
           :value="value"
           :style="isHorizontal ? { display: 'block' }  : { display:'flex' }"
           @drop="dropEntryByKey(key)"
-          @flip="flip"
+          @flip="$emit('flip')"
         />
       </div>
     </div>
@@ -26,10 +26,10 @@ export default {
   components: {EntryPrimitiveValue, Entry},
   props: {
     targetObject: {},
+    isHorizontal: {type: Boolean, required: false, default: false}
   },
   data() {
     return {
-      isHorizontal: false,
       collapsed: false,
     }
   },
@@ -56,9 +56,6 @@ export default {
     }
   },
   methods: {
-    flip: function () {
-      this.isHorizontal = !this.isHorizontal;
-    },
     dropEntryByKey(key) {
       console.log("deleting " + key)
       if (this.isArray) {
