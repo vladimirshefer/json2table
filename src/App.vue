@@ -15,7 +15,7 @@
         </p>
       </div>
       <div id="table" class="col-12 col-lg-8">
-        <div v-show="objectText">
+        <div v-show="objectText" class="d-flex">
           <TableArea :target-object="targetObject"/>
         </div>
       </div>
