@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-1 m-1" style="border: 1px solid black">
     <span v-show="!editable" @dblclick="editingStart">{{ value }}</span>
     <input v-show="editable" type="text" @keydown.enter="update" v-model="value">
   </div>
