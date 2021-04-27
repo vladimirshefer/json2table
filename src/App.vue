@@ -2,10 +2,17 @@
   <div class="container-fluid" id="app">
     <div class="row header">
       <OptionToggleButton hint="Format JSON" :enabled="indent" icon-name="text-indent-left"
+                          text="Format"
                           @click="indent = !indent"/>
+      <OptionToggleButton hint="Show JSON" :enabled="shownElements.json" icon-name="file-text"
+                          text="JSON"
+                          @click="shownElements.json = !shownElements.json"/>
+      <OptionToggleButton hint="Show table" :enabled="shownElements.table" icon-name="table"
+                          text="Table"
+                          @click="shownElements.table = !shownElements.table"/>
     </div>
     <div class="row">
-      <div class="col-12 col-lg-4">
+      <div v-show="shownElements.json" class="col-12 col-lg">
         <textarea v-model="objectText"/>
         <p>
           Insert your JSON here (or use <a href="/?randomJson=true">random JSON</a>).
@@ -14,7 +21,7 @@
           You can change values in table. All changes will be applied to this JSON.
         </p>
       </div>
-      <div id="table" class="col-12 col-lg-8">
+      <div v-show="shownElements.table" id="table" class="col-12 col-lg">
         <div v-show="objectText" class="d-flex">
           <TableArea :target-object="targetObject"/>
         </div>
@@ -50,8 +57,12 @@ export default {
   data() {
     return {
       targetObject: {data: null},
-      indent: false,
-      history: []
+      indent: true,
+      history: [],
+      shownElements: {
+        json: true,
+        table: true,
+      }
     }
   },
   computed: {
@@ -89,6 +100,10 @@ export default {
 
 <style scoped>
 .header { /* TODO temporary solution. remove after bootstrap nav applied*/
-  padding: 10px;
+    padding: 10px;
+}
+
+.header > * {
+    margin-right: 10px;
 }
 </style>

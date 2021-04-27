@@ -5,6 +5,7 @@
       @click="$emit('click')"
   >
     <b-icon :icon="iconName"/>
+    {{text}}
   </b-button>
 </template>
 
@@ -14,7 +15,8 @@ export default {
   props: {
     iconName: {type: String},
     hint: {type: String},
-    enabled: {type: Boolean}
+    enabled: {type: Boolean},
+    text: {type: String}
   }
 }
 </script>
