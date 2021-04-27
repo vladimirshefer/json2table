@@ -1,10 +1,16 @@
 <template>
   <div>
     <p v-if="history.length===0">
-      History is empty. Use Ctrl+S to save current state.
+      History is empty. Use
+      <b-button variant="primary" size="sm" @click="pushHistory">Ctrl+S</b-button>
+      to save current state.
     </p>
-    <p v-if="noChangesDetected">
+    <p v-else-if="noChangesDetected">
       All changes are saved...
+    </p>
+    <p v-else>
+
+      <b-button variant="primary" size="sm" @click="pushHistory">Save</b-button>
     </p>
 
     <ul>
