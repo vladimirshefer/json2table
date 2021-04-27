@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid" id="app">
-    <div class="row header">
+    <div class="row header p-2">
       <OptionToggleButton hint="Format JSON" :enabled="indent" icon-name="text-indent-left"
                           text="Format"
                           @click="indent = !indent"/>
@@ -99,9 +99,6 @@ export default {
 </style>
 
 <style scoped>
-.header { /* TODO temporary solution. remove after bootstrap nav applied*/
-    padding: 10px;
-}
 
 .header > * {
     margin-right: 10px;
