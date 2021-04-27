@@ -3,18 +3,31 @@
     <b>{{ entryKey }}</b>
     <div>
       <b-dropdown variant="custom" size="sm">
+
+        <b-dropdown-item @click="$emit('editing-start')">
+          <b-icon icon="pencil"/>
+          {{ "Редактировать" }}
+        </b-dropdown-item>
+
+        <b-dropdown-divider/>
+
         <b-dropdown-item @click="toggleCollapse">
           <b-icon :icon="collapse ? 'arrows-expand' : 'arrows-collapse'"/>
           {{ collapse ? "Развернуть" : "Свернуть" }}
         </b-dropdown-item>
+
         <b-dropdown-item @click="$emit('flip')">
           <b-icon icon="arrow-clockwise"/>
           Повернуть
         </b-dropdown-item>
+
+        <b-dropdown-divider/>
+
         <b-dropdown-item @click="tryDrop">
           <b-icon icon="x"/>
           Удалить
         </b-dropdown-item>
+
       </b-dropdown>
     </div>
   </div>

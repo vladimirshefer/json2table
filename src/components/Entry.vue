@@ -2,12 +2,13 @@
   <div class="m-1" :style="rootStyle" style="border: 1px solid black;">
     <EntryHeader :entry-key="entryKey"
                  :collapse="isCollapsed"
+                 @editing-start="$refs.value.$refs.primitiveValue.editingStart()"
                  @drop="$emit('drop', $event)"
                  @flip="flip"
                  @collapse="isCollapsed=!isCollapsed"
     />
 
-    <TableArea v-show="!isCollapsed" :target-object="value" :is-horizontal="isHorizontal"/>
+    <TableArea ref="value" v-show="!isCollapsed" :target-object="value" :is-horizontal="isHorizontal"/>
     <EntryCollapsedValue v-if="isCollapsed" @show="isCollapsed=false"/>
   </div>
 </template>
